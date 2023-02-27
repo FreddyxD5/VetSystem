@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser, PermissionMixin
+    BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
 
 # Create your models here.
@@ -29,15 +29,15 @@ class UsuarioManager(BaseUserManager):
         user.save(using=self.db)
         return user
 
-    def create_user(self, username, email, nombres,apellidos, password=None, is_staff, is_superuser, **extra_fields):
-        return self._create_user(username, email, nombres,apellidos, password=None, False, False, **extra_fields)
+    def create_user(self, username, email, nombres,apellidos, password=None,**extra_fields):
+        return self._create_user(username, email, nombres,apellidos, password, False, False, **extra_fields)
     
-    def create_superuser(self, username, email, nombres,apellidos, password=None, is_staff, is_superuser, **extra_fields):
-        return self._create_user(self, username, email, nombres,apellidos, password=None, True, True, **extra_fields)
+    def create_superuser(self, username, email, nombres,apellidos, password=None,**extra_fields):
+        return self._create_user(username, email, nombres,apellidos, password, True, True, **extra_fields)
 
 
 
-class Usuario(AbstractBaseUser, PermissionMixin):
+class Usuario(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=255, unique=True)
     email = models.EmailField('Correo Electronico', max_length=255, unique=True)
     nombres = models.CharField('Nombres' ,max_length=255, blank=True, null=True)
