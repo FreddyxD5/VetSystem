@@ -9,4 +9,4 @@ class CategoryPetSerializer(serializers.ModelSerializer):
 class PetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
-        exclude = ('created_at','modification_at', 'eliminated_at', 'status', )
+        exclude = ('created_at','modified_at', 'eliminated_at', 'status', )
