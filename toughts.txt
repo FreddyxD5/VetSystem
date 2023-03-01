@@ -1,0 +1,30 @@
+# Que quiero hacer como Usuario
+Quiero ver mis perritos que tengo registrados
+Quiero ver los diagnosticos
+quiero ver las facturas que se generen por cada servicio
+Quiero poder pagar las facturas desde la web/app
+
+# Como Administrador
+Quiero Tener acceso a todos
+CRUD para todos las aplicaciones
+Poder generar facturas
+
+#Como empleado
+quiero conocer el numero de chip de la mascota
+
+#Como enfermera quiero poder 
+
+#Como Veterinario 
+Quiero tener acceso a todos los usuarios(Solo puede crear y leer),
+Acceso a las mascotas
+Acceso a los diagnosticos
+
+
+#Como mascota
+quiero recibir tratamiento
+
+
+
+
+
+
