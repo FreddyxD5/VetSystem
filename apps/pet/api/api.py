@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from apps.pet.models import Pet, CategoryPet
-from apps.pet.api.serializers import PetSerializer, CategoryPetSerializer
+from apps.pet.api.serializers import PetSerializer, CategoryPetSerializer, PetDiagnosticSerializer
 
 
 class CategoryPetViewSet(viewsets.ViewSet):
@@ -27,7 +27,7 @@ class CategoryPetViewSet(viewsets.ViewSet):
             return Response({'mensaje':'Categoria creada correctamente'}, status= status.HTTP_200_OK)
         return Response({'Error':'Error'}, status= status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request, pk=None):
+    def update(self, request, pk=None):        
         try:
             queryset = self.model.objects.filter(id=pk).first()
         except:
@@ -61,10 +61,19 @@ class PetViewSet(viewsets.ViewSet):
     def list(self, request):
         data = self.serializer_class(self.get_queryset(), many=True)
         return Response(data.data, status=status.HTTP_200_OK)   
-   
+        
+    @action(detail=True, methods=['get'])
+    def get_all_pets_diagnostics(self, request, pk=None):
+        queryset = self.model.objects.filter(owner=self.kwargs['pk'], status=True)
+        if queryset:
+            data = PetDiagnosticSerializer(queryset, many=True)
+            return Response({'data':data.data}, status=status.HTTP_200_OK)
+        return Response({'error':'El usuario no tiene ninguna mascota registrada'}, status= status.HTTP_400_BAD_REQUEST)
+        
+        
     @action(detail=True, methods=['get'])
     def obtener_mascotas_by_owner(self, request, pk=None):        
-        queryset = self.model.objects.filter(owner=self.kwargs['pk'])
+        queryset = self.model.objects.filter(owner=self.kwargs['pk'], status=True)
         if queryset:
             serializer_data = self.serializer_class(queryset, many=True).data
             return Response({"pets":serializer_data}, status=status.HTTP_200_OK)
@@ -83,7 +92,7 @@ class PetViewSet(viewsets.ViewSet):
             return Response({'mensaje':'Mascota creada correctamente'}, status= status.HTTP_200_OK)
         return Response({'Error':data_serializer.errors}, status= status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request, pk=None):
+    def update(self, request, pk=None):        
         try:
             queryset = self.model.objects.filter(id=pk).first()
         except:

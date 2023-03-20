@@ -7,7 +7,7 @@ router = DefaultRouter()
 router.register('category_pet', CategoryPetViewSet, basename = 'category_pet')
 
 #Pet
-router.register('pet', PetViewSet, basename='pet')
+router.register('', PetViewSet, basename='pet')
 
 urlpatterns = router.urls
 

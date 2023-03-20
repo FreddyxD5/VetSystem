@@ -6,7 +6,7 @@ from apps.users.models import Usuario
 
 
 # Create your models here.
-    
+
 
 class Diagnostic(BaseModel):
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)

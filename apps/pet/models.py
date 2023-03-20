@@ -22,4 +22,4 @@ class Pet(BaseModel):
     status = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.owner.nombre} - {self.name}"
+        return f"{self.name}"

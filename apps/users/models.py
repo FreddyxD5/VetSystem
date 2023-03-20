@@ -82,7 +82,13 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         return f" Usuario {self.username}"
     
     def nombre_completo(self):
-        return f"{self.nombres} {self.apellidos}"
+        full_name = ''
+        if self.nombres != "":
+            full_name += self.nombres
+        if self.apellidos != "":
+            full_name += " "+self.apellidos
+
+        return full_name if full_name != "" else self.username
     
     def save(self,  *args, **kwargs):
         self.codigo_verificacion = f"{self.numero_documento} {self.id}"
