@@ -21,7 +21,7 @@ class PetDiagnosticSerializer(serializers.ModelSerializer):
         exclude = ('created_at','modified_at', 'eliminated_at', 'status', )
 
     def to_representation(self, instance):
-        diagnostics = Diagnostic.objects.filter(pet = instance.id)
+        diagnostics = Diagnostic.objects.filter(pet = instance.id, status=True)
         diagnostics_data = DiagnosticSerializer(diagnostics, many=True)
         return {            
             "name":instance.name,

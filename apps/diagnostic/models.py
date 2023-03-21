@@ -14,7 +14,7 @@ class Diagnostic(BaseModel):
     observations = models.TextField()
     medication = models.TextField()
     instruction = models.TextField()
-    active = models.BooleanField(default=True)
+    status = models.BooleanField(default=True)
 
     def __str__(self):
         return f"Diagnostic{self.pet.name} - {self.pet.owner.nombres}"

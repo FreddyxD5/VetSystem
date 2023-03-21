@@ -9,6 +9,7 @@ class DiagnosticSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         print(instance)
         return {
+            "id":instance.id,
             "pet_name": instance.pet.name,
             "veterinary" :instance.vet.nombre_completo(),
             "observations":instance.observations,
